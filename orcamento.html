@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orçamento Assistência Técnica</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 480px;
+    margin: auto;
+    background: #fff;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #0a7cff;
+}
+
+label {
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+}
+
+select, textarea, input[type="text"], input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 15px;
+    background: #25D366;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1ebe5d;
+}
+
+.footer {
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+    margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Solicitar Orçamento</h2>
+
+    <label>Aparelho</label>
+    <select id="aparelho">
+        <option>Geladeira</option>
+        <option>Máquina de Lavar</option>
+        <option>Tanquinho</option>
+        <option>Freezer</option>
+        <option>Micro-ondas</option>
+        <option>Outro</option>
+    </select>
+
+    <label>Problema</label>
+    <select id="problema">
+        <option>Não está gelando</option>
+        <option>Motor parou</option>
+        <option>Não está enchendo de água</option>
+        <option>Fazendo barulho</option>
+        <option>Não liga</option>
+        <option>Outro problema</option>
+    </select>
+
+    <label>Descreva o problema</label>
+    <textarea id="descricao" rows="4" placeholder="Explique o defeito..."></textarea>
+
+    <button onclick="enviarWhats()">Enviar  Orçamento</button>
+
+    <div class="footer">
+        Atendimento rápido pelo WhatsApp
+    </div>
+</div>
+
+<script>
+function enviarWhats() {
+    var aparelho = document.getElementById("aparelho").value;
+    var problema = document.getElementById("problema").value;
+    var descricao = document.getElementById("descricao").value;
+
+    var texto = 
+        "📋 *Solicitação de Orçamento*%0A%0A" +
+        "*Aparelho:* " + aparelho + "%0A" +
+        "*Problema:* " + problema + "%0A" +
+        "*Descrição:* " + descricao;
+
+    var telefone = "5598981780953";
+    var url = "https://wa.me/" + telefone + "?text=" + texto;
+
+    window.open(url, "_blank");
+}
+</script>
+
+</body>
+</html>
