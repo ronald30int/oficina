@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento via Pix</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 24px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .pix-logo {
+            width: 80px;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+
+        .input-container {
+            position: relative;
+            background: #f8f9fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 16px;
+            word-break: break-all;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #444;
+            text-align: left;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+
+        .btn-copy {
+            background: #32bcad;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 14px;
+            width: 100%;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .btn-copy:active {
+            background: #279287;
+        }
+
+        .success-toast {
+            display: none;
+            background: #2e7d32;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 12px;
+            font-size: 0.85rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <!-- Logo do Pix (via SVG oficial) -->
+        <svg class="pix-logo" viewBox="0 0 137 135" fill="none" xmlns="http://w3.org">
+            <path d="M121.2 50.1L94.6 23.5C80.2 9.1 56.9 9.1 42.5 23.5L15.9 50.1C1.5 64.5 1.5 87.8 15.9 102.2L42.5 128.8C56.9 143.2 80.2 143.2 94.6 128.8L121.2 102.2C135.6 87.8 135.6 64.5 121.2 50.1ZM81.2 104.9H55.9V79.6H81.2V104.9ZM110.1 76.5C110.1 95.1 95.1 110.1 76.5 110.1H60.6V99.4H76.5C89.1 99.4 99.4 89.1 99.4 76.5C99.4 63.9 89.1 53.6 76.5 53.6H60.6V42.9H76.5C95.1 42.9 110.1 57.9 110.1 76.5ZM76.5 32.2H50.3V57.5H25V32.2H50.3V6.9H76.5V32.2Z" fill="#32BCAD"/>
+        </svg>
+
+        <h1>Pagamento via Pix</h1>
+        <p>Clique no botão abaixo para copiar o código "Pix Copia e Cola" e finalize o pagamento no app do seu banco.</p>
+
+        <!-- Container com o código Pix informado -->
+        <div class="input-container" id="pixCode">00020126430014br.gov.bcb.pix0121ronald29int@gmail.com5204000053039865802BR5901N6001C62070503***63049857</div>
+
+        <!-- Botão de ação -->
+        <button class="btn-copy" onclick="copyPix()">Copiar Código Pix</button>
+
+        <!-- Mensagem de confirmação -->
+        <div class="success-toast" id="toast">Código copiado com sucesso!</div>
+    </div>
+
+    <script>
+        function copyPix() {
+            // Seleciona o texto do Pix
+            const pixText = document.getElementById('pixCode').innerText;
+
+            // Usa a API de Clipboard moderna para copiar
+            navigator.clipboard.writeText(pixText).then(() => {
+                const toast = document.getElementById('toast');
+                const btn = document.querySelector('.btn-copy');
+
+                // Altera o texto do botão temporariamente
+                btn.innerText = "Copiado!";
+                toast.style.display = 'block';
+
+                // Reseta o visual após 2.5 segundos
+                setTimeout(() => {
+                    btn.innerText = "Copiar Código Pix";
+                    toast.style.display = 'none';
+                }, 2500);
+            }).catch(err => {
+                alert('Erro ao copiar o código. Por favor, selecione e copie manualmente.');
+            });
+        }
+    </script>
+
+</body>
+</html>
